@@ -14,34 +14,17 @@
       >
     {%- endif -%}
 
-    {% comment %}
-      Opt into cross-document (MPA) view transitions and hold first paint until #MainContent
-      parses, so the transition runs consistently.
-      Both are gated on the same settings as the view-transitions.js opt-out switch (see snippets/scripts.liquid).
-    {% endcomment %}
-    {% if settings.transition_to_main_product or settings.page_transition_enabled %}
-      {% style %}
-        @media (prefers-reduced-motion: no-preference) {
-          @view-transition {
-            navigation: auto;
-          }
-        }
-      {% endstyle %}
-      <link
-        rel="expect"
-        href="#MainContent"
-        blocking="render"
-        id="view-transition-render-blocker"
-      >
-    {% endif %}
-
     {%- render 'meta-tags' -%}
-    {%- render 'stylesheets' -%}
-    {%- render 'fonts' -%}
-    {%- render 'scripts' -%}
-    {%- render 'theme-styles-variables' -%}
-    {%- render 'color-palette' -%}
 
+    {%- render 'stylesheets' -%}
+
+    {%- render 'fonts' -%}
+
+    {%- render 'scripts' -%}
+
+    {%- render 'theme-styles-variables' -%}
+
+    {%- render 'color-palette' -%}
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}
@@ -55,10 +38,6 @@
     {% render 'chat-drawer' %}
 
     <div class="page-wrapper">
-      <div id="header-group">
-        {% sections 'header-group' %}
-      </div>
-
       <script>
         // Inline header height and menu style calculations to prevent layout shift
         // Note: Updates in calculateHeaderGroupHeight(), updateTransparentHeaderOffset() and setHeaderMenuStyle() utilities.js should be kept in sync with this function
@@ -137,19 +116,6 @@
       >
         {{ content_for_layout }}
       </main>
-
-      <footer>
-        {% sections 'footer-group' %}
-      </footer>
     </div>
-
-    {% render 'cart-drawer', render_wrapper: true %}
-    {% render 'theme-drawer' %}
-
-    {% render 'search-modal' %}
-
-    {% if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add-modal' %}
-    {% endif %}
   </body>
 </html>

@@ -1,7 +1,7 @@
-import { Component } from '@theme/component';
-import { debounce, fetchConfig } from '@theme/utilities';
-import { cartPerformance } from '@theme/performance';
-import { CartErrorEvent, CartNoteUpdateEvent } from '@shopify/events';
+import { Component } from "@theme/component";
+import { debounce, fetchConfig } from "@theme/utilities";
+import { cartPerformance } from "@theme/performance";
+import { CartErrorEvent, CartNoteUpdateEvent } from "@shopify/events";
 
 /**
  * A custom element that displays a cart note.
@@ -26,19 +26,19 @@ class CartNote extends Component {
     this.#activeFetch = abortController;
 
     // Dispatch the cart note update event before the fetch with a promise for the result
-    const isDialog = Boolean(this.closest('dialog'));
+    const isDialog = Boolean(this.closest("dialog"));
     const deferredPromise = CartNoteUpdateEvent.createPromise();
 
     this.dispatchEvent(
       new CartNoteUpdateEvent({
-        context: isDialog ? 'dialog' : 'cart',
+        context: isDialog ? "dialog" : "cart",
         note,
         promise: deferredPromise.promise,
-      })
+      }),
     );
 
     try {
-      const config = fetchConfig('json', {
+      const config = fetchConfig("json", {
         body: JSON.stringify({ note }),
       });
 
@@ -49,25 +49,27 @@ class CartNote extends Component {
 
       const data = await response.json();
 
-      deferredPromise.resolve({ cart: CartNoteUpdateEvent.createCartFromAjaxResponse(data) });
+      deferredPromise.resolve({
+        cart: CartNoteUpdateEvent.createCartFromAjaxResponse(data),
+      });
     } catch (error) {
       deferredPromise.reject(error);
       // Don't dispatch error for user-triggered aborts
-      if (error instanceof Error && error.name !== 'AbortError') {
+      if (error instanceof Error && error.name !== "AbortError") {
         this.dispatchEvent(
           new CartErrorEvent({
-            error: error.message || 'Failed to update cart note',
-            code: 'SERVICE_UNAVAILABLE',
-          })
+            error: error.message || "Failed to update cart note",
+            code: "SERVICE_UNAVAILABLE",
+          }),
         );
       }
     } finally {
       this.#activeFetch = null;
-      cartPerformance.measureFromEvent('note-update:user-action', event);
+      cartPerformance.measureFromEvent("note-update:user-action", event);
     }
   }, 200);
 }
 
-if (!customElements.get('cart-note')) {
-  customElements.define('cart-note', CartNote);
+if (!customElements.get("cart-note")) {
+  customElements.define("cart-note", CartNote);
 }

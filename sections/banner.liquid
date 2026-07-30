@@ -1,0 +1,138 @@
+{{ 'banner.css' | asset_url | stylesheet_tag }}
+<section
+  class="banner"
+
+  data-section-id="{{ section.id }}"
+>
+  <div class="banner__container">
+    <!-- TOP BAR -->
+    <div class="banner__topbar">
+      <div class="banner__logo">
+        {{ section.settings.logo_text }}
+      </div>
+
+      <div class="banner__announcement">
+        {{ section.settings.announcement_text }}
+      </div>
+
+      {% if section.settings.cta_text != blank %}
+        <a
+          href="{{ section.settings.cta_link }}"
+          class="banner__button banner__button--yellow"
+        >
+          {{ section.settings.cta_text }}
+
+          <span class="arrow"> → </span>
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- HERO CONTENT -->
+    <div class="banner__hero" style="background-image: url( {{ 'BG.png' | asset_url }} );">
+      <div class="banner__content">
+        <h1>
+          {{ section.settings.heading }}
+        </h1>
+
+        {% if section.settings.description != blank %}
+          <div class="banner__description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.shop_text != blank %}
+          <a
+            href="{{ section.settings.shop_link }}"
+            class="banner__button banner__button--black"
+          >
+            <span>{{ section.settings.shop_text }}</span>
+
+            <span class="arrow"> → </span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    {% if section.settings.footer_text != blank %}
+      <div class="banner__footer">
+        {{ section.settings.footer_text }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner",
+
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "TISSO VISION"
+    },
+
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Find the ideal gift for your loved ones."
+    },
+
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Top button text",
+      "default": "CHOOSE GIFT"
+    },
+
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Top button link"
+    },
+
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    },
+
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>"
+    },
+
+    {
+      "type": "text",
+      "id": "shop_text",
+      "label": "Shop button text",
+      "default": "SHOP NOW"
+    },
+
+    {
+      "type": "url",
+      "id": "shop_link",
+      "label": "Shop button link"
+    },
+
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Banner"
+    }
+  ]
+}
+{% endschema %}

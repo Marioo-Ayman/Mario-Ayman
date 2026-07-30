@@ -1,0 +1,51 @@
+{%- comment -%}
+  ------------------------------------------------------------------
+  Snippet: gift-guide-modal
+  ------------------------------------------------------------------
+{%- endcomment -%}
+
+<div
+  id="GiftGuideModal"
+  class="gift-modal"
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="GiftGuideModalTitle"
+>
+  <div class="gift-modal__overlay" data-gift-modal-close></div>
+
+  <div class="gift-modal__dialog" tabindex="-1">
+    <button
+      type="button"
+      class="gift-modal__close"
+      data-gift-modal-close
+      aria-label="{{ 'actions.close' | t | default: 'Close' }}"
+    >
+      &times;
+    </button>
+
+    <div class="gift-modal__body">
+      <div class="gift-modal__media">
+        <img class="gift-modal__image" src="" alt="" width="400" height="400">
+      </div>
+
+      <div class="gift-modal__info">
+        <h2 class="gift-modal__title" id="GiftGuideModalTitle"></h2>
+        <p class="gift-modal__price"></p>
+        <p class="gift-modal__description"></p>
+
+        {%- comment -%} Option controls (color buttons / size select / etc.) get injected here {%- endcomment -%}
+        <div class="gift-modal__options"></div>
+
+        <button type="button" class="gift-modal__add-to-cart gift-animated-button gift-animated-button--dark" disabled>
+          <span class="gift-animated-button__label">
+            {{- 'products.product.add_to_cart' | t | default: 'Add to cart' -}}
+          </span>
+          <span class="gift-animated-button__arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <p class="gift-modal__message" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</div>

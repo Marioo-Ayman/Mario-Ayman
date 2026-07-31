@@ -1,6 +1,7 @@
 {%- comment -%}
   ------------------------------------------------------------------
   Snippet: gift-guide-modal
+  Pixel-perfect quick view modal
   ------------------------------------------------------------------
 {%- endcomment -%}
 
@@ -12,39 +13,75 @@
   aria-modal="true"
   aria-labelledby="GiftGuideModalTitle"
 >
-  <div class="gift-modal__overlay" data-gift-modal-close></div>
+  <div
+    class="gift-modal__overlay"
+    data-gift-modal-close
+  ></div>
 
-  <div class="gift-modal__dialog" tabindex="-1">
+  <div
+    class="gift-modal__dialog"
+    tabindex="-1"
+  >
     <button
       type="button"
       class="gift-modal__close"
       data-gift-modal-close
       aria-label="{{ 'actions.close' | t | default: 'Close' }}"
     >
-      &times;
+      ✕
     </button>
 
     <div class="gift-modal__body">
+      <!-- Product Image -->
       <div class="gift-modal__media">
-        <img class="gift-modal__image" src="" alt="" width="400" height="400">
+        <img
+          class="gift-modal__image"
+          src=""
+          alt=""
+          width="400"
+          height="500"
+          loading="lazy"
+        >
       </div>
 
+      <!-- Product Information -->
       <div class="gift-modal__info">
-        <h2 class="gift-modal__title" id="GiftGuideModalTitle"></h2>
+        <h2
+          class="gift-modal__title"
+          id="GiftGuideModalTitle"
+        ></h2>
+
         <p class="gift-modal__price"></p>
+
         <p class="gift-modal__description"></p>
 
-        {%- comment -%} Option controls (color buttons / size select / etc.) get injected here {%- endcomment -%}
+        <!-- Dynamic Options -->
         <div class="gift-modal__options"></div>
 
-        <button type="button" class="gift-modal__add-to-cart gift-animated-button gift-animated-button--dark" disabled>
+        <!-- Add To Cart -->
+        <button
+          type="button"
+          class="gift-modal__add-to-cart gift-animated-button gift-animated-button--dark"
+          disabled
+        >
           <span class="gift-animated-button__label">
-            {{- 'products.product.add_to_cart' | t | default: 'Add to cart' -}}
+            {{ 'products.product.add_to_cart' | t | default: 'ADD TO CART' }}
           </span>
-          <span class="gift-animated-button__arrow" aria-hidden="true">&rarr;</span>
+
+          <span
+            class="gift-animated-button__arrow"
+            aria-hidden="true"
+          >
+            →
+          </span>
         </button>
 
-        <p class="gift-modal__message" role="status" aria-live="polite"></p>
+        <!-- Status Message -->
+        <p
+          class="gift-modal__message"
+          role="status"
+          aria-live="polite"
+        ></p>
       </div>
     </div>
   </div>

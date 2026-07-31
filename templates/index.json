@@ -15,7 +15,7 @@
     "Product-grid": {
       "type": "product-grid",
       "settings": {}
-    },
+    }
   },
   "order": ["banner", "Product-grid"]
 }

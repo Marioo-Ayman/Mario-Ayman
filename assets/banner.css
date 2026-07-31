@@ -301,24 +301,29 @@
   grid-template-columns: 180px 1fr;
   gap: 1.5rem;
 }
-
 .gift-modal__media {
   width: 100%;
 }
 .gift-modal__image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  min-height: 220px;
   display: block;
   object-fit: cover;
 }
 
+.gift-modal__info {
+  display: flex;
+  flex-direction: column;
+}
 .gift-modal__title {
   margin: 0 0 0.35rem;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: Jost, "Times New Roman", serif;
   font-size: 1.5rem;
 }
 .gift-modal__price {
   font-size: 1.2rem;
+  font-family: Lustria, "Times New Roman", serif;
   margin: 0 0 0.75rem;
 }
 
